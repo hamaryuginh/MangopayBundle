@@ -106,7 +106,7 @@ class LegalUserHelper
         }
 
         $event = new UserEvent($user, $mangoUser);
-        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_USER, $event);
+        $this->dispatcher->dispatch($event, TroopersMangopayEvents::NEW_USER);
 
         return $mangoUser;
     }

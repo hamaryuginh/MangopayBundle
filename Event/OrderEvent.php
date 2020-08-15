@@ -2,7 +2,7 @@
 
 namespace Troopers\MangopayBundle\Event;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Troopers\MangopayBundle\Entity\Order;
 
 class OrderEvent extends Event

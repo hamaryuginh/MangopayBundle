@@ -58,7 +58,7 @@ class WalletHelper
         $mangoWallet = $this->mangopayHelper->Wallets->create($mangoWallet);
 
         $event = new WalletEvent($mangoWallet, $user);
-        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_WALLET, $event);
+        $this->dispatcher->dispatch($event, TroopersMangopayEvents::NEW_WALLET);
 
         return $mangoWallet;
     }

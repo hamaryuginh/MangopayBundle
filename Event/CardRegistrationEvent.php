@@ -3,7 +3,7 @@
 namespace Troopers\MangopayBundle\Event;
 
 use MangoPay\CardRegistration;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class CardRegistrationEvent extends Event
 {

@@ -3,7 +3,7 @@
 namespace Troopers\MangopayBundle\Event;
 
 use MangoPay\PayIn;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class PayInEvent extends Event
 {

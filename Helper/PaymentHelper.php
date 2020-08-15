@@ -45,7 +45,7 @@ class PaymentHelper
         $mangoCardRegistration = $this->mangopayHelper->CardRegistrations->create($cardRegistration);
 
         $event = new CardRegistrationEvent($cardRegistration);
-        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_CARD_REGISTRATION, $event);
+        $this->dispatcher->dispatch($event, TroopersMangopayEvents::NEW_CARD_REGISTRATION);
 
         $cardRegistrationURL = $mangoCardRegistration->CardRegistrationURL;
         $preregistrationData = $mangoCardRegistration->PreregistrationData;
@@ -89,7 +89,7 @@ class PaymentHelper
         $updatedCardRegister = $this->mangopayHelper->CardRegistrations->Update($cardRegister);
 
         $event = new CardRegistrationEvent($updatedCardRegister);
-        $this->dispatcher->dispatch(TroopersMangopayEvents::UPDATE_CARD_REGISTRATION, $event);
+        $this->dispatcher->dispatch($event, TroopersMangopayEvents::UPDATE_CARD_REGISTRATION);
 
         return $updatedCardRegister;
     }
@@ -121,7 +121,7 @@ class PaymentHelper
         $preAuth = $this->mangopayHelper->CardPreAuthorizations->Create($cardPreAuthorisation);
 
         $event = new PreAuthorisationEvent($order, $preAuth);
-        $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_CARD_PREAUTHORISATION, $event);
+        $this->dispatcher->dispatch($event, TroopersMangopayEvents::NEW_CARD_PREAUTHORISATION);
 
         return $preAuth;
     }
@@ -170,13 +170,13 @@ class PaymentHelper
 
         if (property_exists($payIn, 'Status') && $payIn->Status != 'FAILED') {
             $event = new PayInEvent($payIn);
-            $this->dispatcher->dispatch(TroopersMangopayEvents::NEW_PAY_IN, $event);
+            $this->dispatcher->dispatch($event, TroopersMangopayEvents::NEW_PAY_IN);
 
             return $payIn;
         }
 
         $event = new PayInEvent($payIn);
-        $this->dispatcher->dispatch(TroopersMangopayEvents::ERROR_PAY_IN, $event);
+        $this->dispatcher->dispatch($event, TroopersMangopayEvents::ERROR_PAY_IN);
 
         throw new MangopayPayInCreationException($this->translator->trans(
             'mangopay.error.'.$payIn->ResultCode,
@@ -192,7 +192,7 @@ class PaymentHelper
             $this->mangopayHelper->CardPreAuthorizations->Update($mangoCardPreAuthorisation);
 
             $event = new PreAuthorisationEvent($order, $mangoCardPreAuthorisation);
-            $this->dispatcher->dispatch(TroopersMangopayEvents::CANCEL_CARD_PREAUTHORISATION, $event);
+            $this->dispatcher->dispatch($event, TroopersMangopayEvents::CANCEL_CARD_PREAUTHORISATION);
         }
     }
 
